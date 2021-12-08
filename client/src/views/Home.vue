@@ -5,7 +5,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import PanelContainer from '@/components/PanelContainer.vue'
 
 export default {

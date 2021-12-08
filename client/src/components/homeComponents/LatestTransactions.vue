@@ -8,7 +8,7 @@
         <th>Amount</th>
       </tr>
       <tr v-for="(transaction, i) in transactions" :key="i">
-        <td>{{transaction.hash}}</td>
+        <td class="link" @click="openTransaction(transaction.hash)">{{transaction.hash}}</td>
         <td>{{transaction.timestamp}}</td>
         <td>{{transaction.amount}}</td>
       </tr>
@@ -18,12 +18,18 @@
 
 <script>
 import axios from "axios"
+import router from '../../router'
 export default {
   name: 'LatestTransactions',
   data() {
     return {
       transactions: []
     }
+  },
+  methods: {
+    openTransaction(hash) {
+      router.push({ path: `/transactions/${hash}`})
+    },
   },
   async mounted() {
     const transactions = await axios.get("http://localhost:5000/transactions")
@@ -32,6 +38,5 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>

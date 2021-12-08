@@ -2,7 +2,7 @@
   <div id="nav">
     <router-link to="/">Home</router-link> |
     <router-link to="/blocks">Blocks</router-link> |
-    <router-link to="/transactions">Transactions</router-link>
+    <router-link to="/transactions">Transactions</router-link> 
   </div>
   <router-view/>
 </template>
@@ -28,4 +28,11 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+.link{
+  color: blue;
+  text-decoration: underline;
+  text-decoration-color: blue;
+}
+
 </style>

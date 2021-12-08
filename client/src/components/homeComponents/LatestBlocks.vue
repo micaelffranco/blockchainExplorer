@@ -8,9 +8,9 @@
         <th>Miner</th>
       </tr>
       <tr v-for="(block, i) in blocks" :key="i">
-        <td>{{block.height}}</td>
+        <td class="link" @click="openBlock(block.height)">{{block.height}}</td>
         <td>{{block.timestamp}}</td>
-        <td>{{block.miner}}</td>
+        <td class="link" @click="openWallet(block.miner)">{{block.miner}}</td>
       </tr>
     </table>
   </div>
@@ -18,11 +18,20 @@
 
 <script>
 import axios from "axios"
+import router from '../../router'
 export default {
   name: 'LatestBlocks',
   data() {
     return {
       blocks: []
+    }
+  },
+  methods: {
+    openBlock(height) {
+      router.push({ path: `/blocks/${height}`})
+    },
+    openWallet(address){
+      router.push({ path: `/wallets/${address}`})
     }
   },
   async mounted() {
@@ -32,6 +41,5 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>

@@ -1,23 +1,39 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Blocks from '../views/Blocks.vue'
+import Block from '../views/Block.vue'
 import Transactions from '../views/Transactions.vue'
+import Transaction from '../views/Transaction.vue'
+import Wallet from '../views/Wallet.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
     component: Home
   },
   {
     path: '/blocks',
-    name: 'Blocks',
     component: Blocks
   },
   {
+    path: '/blocks/:height',
+    component: Block
+  },
+  {
+    path: '/blocks/:height/transactions/:hash',
+    component: Transaction
+  },
+  {
     path: '/transactions',
-    name: 'Transactions',
     component: Transactions
+  },
+  {
+    path: '/transactions/:hash',
+    component: Transaction
+  },
+  {
+    path: '/wallets/:address',
+    component: Wallet
   }
 ]
 
