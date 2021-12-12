@@ -17,7 +17,7 @@ export default {
 body {
   margin: 0;
   height: 100%;
-  background-color: #696969;
+  background-color: #DCDCDC;
 }
 
 #app {
@@ -25,9 +25,7 @@ body {
 }
 
 .link{
-  color: blue;
-  text-decoration: underline;
-  text-decoration-color: blue;
+  color: #4169E1;
 }
 
 .link:hover {

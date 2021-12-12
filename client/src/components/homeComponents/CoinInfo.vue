@@ -5,19 +5,17 @@
         <div class="title">XI Price</div>
         <div class="content">{{this.numberWithCommas(this.xiPrice)}} $</div>
       </div>
-      <div class="bottomDetail">
+      <div class="headDetail">
         <div class="title">Market Cap</div>
         <div class="content">{{this.numberWithCommas(this.marketCap)}} $</div>
       </div>
-    </div>
-    <div class="detailsContainer">
       <div class="headDetail">
         <div class="title">Number of transactions</div>
         <div class="content">{{this.numberOfTRansactions}}</div>
       </div>
       <div class="bottomDetail">
         <div class="title">Amount transacted</div>
-        <div class="content">{{this.numberWithCommas(this.amountTransacted)}} $</div>
+        <div class="content">{{this.numberWithCommas(this.amountTransacted)}} XI</div>
       </div>
     </div>
     <div class="graphContainer">
@@ -71,7 +69,7 @@ export default {
 }
 
 .graphContainer {
-  width: 50%;
+  width: 80%;
   padding-right: 2%;
   padding-left: 2%;
   margin-top: 2%;
@@ -79,10 +77,11 @@ export default {
 }
 
 .detailsContainer {
-  width: 25%;
+  width: 20%;
   border-right: 1px solid #D3D3D3;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   padding-right: 2%;
   padding-left: 2%;
   margin-top: 2%;
@@ -91,11 +90,11 @@ export default {
 
 .headDetail {
   border-bottom: 1px solid #D3D3D3;
-  height: 50%;
+  padding-bottom: 5%;
+  padding-top: 5%;
 }
 
 .bottomDetail {
-  height: 50%;
 }
 
 .title {

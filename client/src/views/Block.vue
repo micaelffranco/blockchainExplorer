@@ -101,9 +101,7 @@ export default {
 
 .tdLinkStyle {
   border-top: 1px solid #D3D3D3;
-  color: blue;
-  text-decoration: underline;
-  text-decoration-color: blue;
+  color: #4169E1;
 }
 
 .tdLinkStyle:hover {
