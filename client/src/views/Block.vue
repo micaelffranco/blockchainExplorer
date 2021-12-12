@@ -33,7 +33,7 @@
         <th>From</th>
         <th>To</th>
       </tr>
-      <tr v-for="(transaction, i) in block.transactions" :key="i">
+      <tr v-for="(transaction, i) in transactions" :key="i">
         <td class="link" @click="openTransaction(this.block.height, transaction.hash)">{{transaction.hash}}</td>
         <td>{{transaction.timestamp}}</td>
         <td>{{transaction.amount}}</td>
@@ -42,6 +42,8 @@
         <td class="link" @click="openWallet(transaction.to)">{{transaction.to}}</td>
       </tr>
     </table>
+    <button :disabled="pageNumber == 1" @click="prevPage">Previous</button>
+    <button :disabled="pageNumber >= Math.ceil(this.block.transactions.length/this.itemsPerPage)" @click="nextPage">Next</button>
   </div>
   <Hexagon v-else/>
 </template>
@@ -58,7 +60,10 @@ export default {
   data() {
     return {
       block: [],
-      loaded: false
+      loaded: false,
+      transactions: [],
+      pageNumber: 1,
+      itemsPerPage: 10
     }
   },
   methods: {
@@ -67,11 +72,20 @@ export default {
     },
     openTransaction(height, hash) {
       router.push({ path: `/blocks/${height}/transactions/${hash}`})
+    },
+    prevPage(){
+      this.pageNumber--
+      this.transactions = this.block.transactions.slice((this.pageNumber * this.itemsPerPage)-this.itemsPerPage, this.pageNumber * this.itemsPerPage)
+    },
+    nextPage(){
+      this.pageNumber++
+      this.transactions = this.block.transactions.slice((this.pageNumber * this.itemsPerPage)-this.itemsPerPage, this.pageNumber * this.itemsPerPage)
     }
   },
   async mounted() {
     const block = await axios.get("http://localhost:5000/blocks/" + this.$route.params.height)
     this.block = block.data
+    this.transactions = this.block.transactions.slice(0, this.itemsPerPage)
     this.loaded = true
   }
 }
