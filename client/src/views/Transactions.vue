@@ -13,8 +13,8 @@
       <tr v-for="(transaction, i) in transactions" :key="i">
         <td class="link" @click="openTransaction(transaction.hash)">{{transaction.hash}}</td>
         <td>{{new Date(transaction.timestamp).toLocaleTimeString([], {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute:'2-digit', second:'2-digit'})}}</td>
-        <td>{{transaction.amount}}</td>
-        <td>{{transaction.fee}}</td>
+        <td>{{transaction.amount}} $</td>
+        <td>{{transaction.fee}} $</td>
         <td class="link" @click="openWallet(transaction.from)">{{transaction.from}}</td>
         <td class="link" @click="openWallet(transaction.to)">{{transaction.to}}</td>
       </tr>
