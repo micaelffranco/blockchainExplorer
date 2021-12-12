@@ -28,6 +28,10 @@ body {
   text-decoration-color: blue;
 }
 
+.link:hover {
+  cursor: pointer;
+}
+
 .loadingSpinner {
   margin: 50px;
   display: flex;

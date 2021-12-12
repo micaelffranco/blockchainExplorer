@@ -40,9 +40,9 @@ export default {
   },
   async mounted() {
     const blocks = await axios.get("http://localhost:5000/blocks/")
-    this.blocks = blocks.data
+    this.blocks = blocks.data.slice(0, 5)
     const transactions = await axios.get("http://localhost:5000/transactions")
-    this.transactions = transactions.data
+    this.transactions = transactions.data.slice(0, 5)
     this.loaded = true
   }
 }
@@ -59,13 +59,19 @@ export default {
 
 .blockContainer {
   width: 50%;
-  border-top: 0.2px solid	#DCDCDC;
   border-right: 0.2px solid #DCDCDC;
+  padding-right: 2%;
+  padding-left: 2%;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 
 .transactionContainer {
   width: 50%;
-  border-top: 0.2px solid	#DCDCDC;
+  padding-right: 2%;
+  padding-left: 2%;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 
 
