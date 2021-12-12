@@ -1,4 +1,7 @@
 <template>
+  <div>
+    <CoinInfo/>
+  </div>
   <div class="panelContainer">
     <div class="blockContainer">
       <LatestBlocks/>
@@ -12,11 +15,13 @@
 <script>
 import LatestBlocks from '@/components/homeComponents/LatestBlocks.vue'
 import LatestTransactions from '@/components/homeComponents/LatestTransactions.vue'
+import CoinInfo from '@/components/homeComponents/CoinInfo.vue'
 export default {
   name: 'PanelContainer',
   components: {
     LatestBlocks,
-    LatestTransactions
+    LatestTransactions,
+    CoinInfo
   }
 }
 </script>
