@@ -50,16 +50,10 @@ export default {
     }
   },
   async mounted() {
-    this.blocks.forEach((block) => {
-        this.numberOfTRansactions += block.transactions.length
-        block.transactions.forEach((transaction) => {
-          this.amountTransacted += transaction.amount
-          const fullDate = new Date(transaction.timestamp).toLocaleTimeString([], {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute:'2-digit'})
-          this.chartData[fullDate] ? this.chartData[fullDate] = this.chartData[fullDate] + 1 : this.chartData[fullDate] = 1
-        });
-    });
-    this.marketCap = Math.round((this.amountTransacted * this.xiPrice + Number.EPSILON) * 100) / 100
-    this.amountTransacted = Math.round((this.amountTransacted + Number.EPSILON) * 100) / 100
+    this.numberOfTRansactions = this.blocks.numberOfTRansactions
+    this.chartData = this.blocks.chartData
+    this.marketCap = Math.round((this.blocks.amountTransacted * this.xiPrice + Number.EPSILON) * 100) / 100
+    this.amountTransacted = Math.round((this.blocks.amountTransacted + Number.EPSILON) * 100) / 100
     this.loaded = true
   }
 }

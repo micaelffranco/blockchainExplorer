@@ -1,11 +1,11 @@
 <template>
   <div v-if="loaded">
     <div>
-      <CoinInfo :blocks="blocks"/>
+      <CoinInfo :blocks="coinInfo"/>
     </div>
     <div class="panelContainer">
       <div class="blockContainer">
-        <LatestBlocks :blocks="blocks"/>
+        <LatestBlocks :blocks="latestBlocks"/>
       </div>
       <div class="transactionContainer">
         <LatestTransactions :transactions="transactions"/>
@@ -27,7 +27,8 @@ export default {
   name: 'PanelContainer',
   data() {
     return {
-      blocks: [],
+      latestBlocks: [],
+      coinInfo: [],
       transactions: [],
       loaded: false
     }
@@ -39,8 +40,9 @@ export default {
     Hexagon
   },
   async mounted() {
-    const blocks = await axios.get("http://localhost:5000/blocks/")
-    this.blocks = blocks.data.slice(0, 5)
+    const request = await axios.get("http://localhost:5000/blocks/coinInfoEndpoint")
+    this.coinInfo = request.data
+    this.latestBlocks = request.data.blocks.slice(0, 5)
     const transactions = await axios.get("http://localhost:5000/transactions")
     this.transactions = transactions.data.slice(0, 5)
     this.loaded = true
