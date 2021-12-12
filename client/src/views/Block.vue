@@ -45,7 +45,9 @@
     <button :disabled="pageNumber == 1" @click="prevPage">Previous</button>
     <button :disabled="pageNumber >= Math.ceil(this.block.transactions.length/this.itemsPerPage)" @click="nextPage">Next</button>
   </div>
-  <Hexagon v-else/>
+  <div class="loadingSpinner" v-else>
+    <Hexagon/>
+  </div>
 </template>
 
 <script>

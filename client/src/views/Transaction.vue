@@ -28,7 +28,9 @@
       </tr>
     </table>
   </div>
-  <Hexagon v-else/>
+  <div class="loadingSpinner" v-else>
+    <Hexagon/>
+  </div>
 </template>
 
 <script>
