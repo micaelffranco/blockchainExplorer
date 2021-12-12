@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="loaded">
     <div>Transaction Info</div>
     <table>
       <tr>
@@ -28,16 +28,22 @@
       </tr>
     </table>
   </div>
+  <Hexagon v-else/>
 </template>
 
 <script>
 import axios from "axios"
 import router from '../router'
+import {Hexagon} from 'vue-loading-spinner'
 export default {
   name: 'Transaction',
+  components: {
+    Hexagon
+  },
   data() {
     return {
-      transaction: []
+      transaction: [],
+      loaded: false
     }
   },
   methods: {
@@ -46,7 +52,6 @@ export default {
     }
   },
   async mounted() {
-    console.log(this.propsTransaction)
     if (!this.$route.params.height) {
       const transactions = await axios.get("http://localhost:5000/transactions")
       this.transaction = transactions.data.find( trans => trans.hash === this.$route.params.hash)
@@ -54,6 +59,7 @@ export default {
       const transaction = await axios.get("http://localhost:5000/blocks/" + this.$route.params.height + "/transactions/" + this.$route.params.hash)
       this.transaction = transaction.data
     }
+    this.loaded = true
   }
 }
 </script>

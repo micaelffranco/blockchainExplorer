@@ -17,23 +17,16 @@
 </template>
 
 <script>
-import axios from "axios"
 import router from '../../router'
 export default {
   name: 'LatestTransactions',
-  data() {
-    return {
-      transactions: []
-    }
+  props: {
+    transactions: Object
   },
   methods: {
     openTransaction(hash) {
       router.push({ path: `/transactions/${hash}`})
     },
-  },
-  async mounted() {
-    const transactions = await axios.get("http://localhost:5000/transactions")
-    this.transactions = transactions.data
   }
 }
 </script>

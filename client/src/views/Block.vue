@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="loaded">
     <div>Block Info</div>
     <table>
       <tr>
@@ -43,16 +43,22 @@
       </tr>
     </table>
   </div>
+  <Hexagon v-else/>
 </template>
 
 <script>
 import axios from "axios"
 import router from '../router'
+import {Hexagon} from 'vue-loading-spinner'
 export default {
   name: 'Block',
+  components: {
+    Hexagon
+  },
   data() {
     return {
-      block: []
+      block: [],
+      loaded: false
     }
   },
   methods: {
@@ -66,6 +72,7 @@ export default {
   async mounted() {
     const block = await axios.get("http://localhost:5000/blocks/" + this.$route.params.height)
     this.block = block.data
+    this.loaded = true
   }
 }
 </script>

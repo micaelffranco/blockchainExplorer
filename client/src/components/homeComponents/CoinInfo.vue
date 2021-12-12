@@ -20,9 +20,11 @@
 </template>
 
 <script>
-import axios from "axios"
 export default {
   name: 'CoinInfo',
+  props:{
+    blocks: Object
+  },
   data() {
     return {
       xiPrice: 1700,
@@ -35,9 +37,7 @@ export default {
     }
   },
   async mounted() {
-    const blocks = await axios.get("http://localhost:5000/blocks/")
-    this.blocks = blocks.data
-    blocks.data.forEach((block) => {
+    this.blocks.forEach((block) => {
         this.numberOfTRansactions += block.transactions.length
         block.transactions.forEach((transaction) => {
           this.amountTransacted += transaction.amount
@@ -45,9 +45,8 @@ export default {
           this.chartData[fullDate] ? this.chartData[fullDate] = this.chartData[fullDate] + 1 : this.chartData[fullDate] = 1
         });
     });
-    this.loaded = true
     this.marketCap = this.amountTransacted * this.xiPrice
-    console.log(this.testData)
+    this.loaded = true
   }
 }
 </script>

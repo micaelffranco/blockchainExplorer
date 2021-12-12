@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="loaded">
     <div>Wallet Info</div>
     <table>
       <tr>
@@ -16,20 +16,27 @@
       </tr>
     </table>
   </div>
+  <Hexagon v-else/>
 </template>
 
 <script>
 import axios from "axios"
+import {Hexagon} from 'vue-loading-spinner'
 export default {
   name: 'Wallet',
+  components: {
+    Hexagon
+  },
   data() {
     return {
-      wallet: []
+      wallet: [],
+      loaded: false
     }
   },
   async mounted() {
     const wallet = await axios.get("http://localhost:5000/wallets/" + this.$route.params.address)
     this.wallet = wallet.data
+    this.loaded = true
   }
 }
 </script>

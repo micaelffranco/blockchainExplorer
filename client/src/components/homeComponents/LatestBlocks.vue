@@ -17,14 +17,11 @@
 </template>
 
 <script>
-import axios from "axios"
 import router from '../../router'
 export default {
   name: 'LatestBlocks',
-  data() {
-    return {
-      blocks: []
-    }
+  props:{
+    blocks: Object
   },
   methods: {
     openBlock(height) {
@@ -33,10 +30,6 @@ export default {
     openWallet(address){
       router.push({ path: `/wallets/${address}`})
     }
-  },
-  async mounted() {
-    const blocks = await axios.get("http://localhost:5000/blocks/")
-    this.blocks = blocks.data
   }
 }
 </script>
