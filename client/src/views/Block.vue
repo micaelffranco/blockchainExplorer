@@ -1,49 +1,53 @@
 <template>
   <div v-if="loaded">
-    <div>Block Info</div>
-    <table>
-      <tr>
-        <th>Height</th>
-        <td>{{this.block.height}}</td>
-      </tr>
-      <tr>
-        <th>Hash</th>
-        <td>{{this.block.hash}}</td>
-      </tr>
-      <tr>
-        <th>Hora</th>
-        <td>{{this.block.timestamp}}</td>
-      </tr>
-      <tr>
-        <th>Miner</th>
-        <td class="link" @click="openWallet(this.block.miner)">{{this.block.miner}}</td>
-      </tr>
-      <tr>
-        <th>Number of Transactions</th>
-        <td>{{this.block.transactions && this.block.transactions.length }}</td>
-      </tr>
-    </table>
-    <div>Transactions</div>
-    <table>
-      <tr>
-        <th>Hash</th>
-        <th>Hora</th>
-        <th>Amount</th>
-        <th>Fee</th>
-        <th>From</th>
-        <th>To</th>
-      </tr>
-      <tr v-for="(transaction, i) in transactions" :key="i">
-        <td class="link" @click="openTransaction(this.block.height, transaction.hash)">{{transaction.hash}}</td>
-        <td>{{transaction.timestamp}}</td>
-        <td>{{transaction.amount}}</td>
-        <td>{{transaction.fee}}</td>
-        <td class="link" @click="openWallet(transaction.from)">{{transaction.from}}</td>
-        <td class="link" @click="openWallet(transaction.to)">{{transaction.to}}</td>
-      </tr>
-    </table>
-    <button :disabled="pageNumber == 1" @click="prevPage">Previous</button>
-    <button :disabled="pageNumber >= Math.ceil(this.block.transactions.length/this.itemsPerPage)" @click="nextPage">Next</button>
+    <div class="blocksContainer">
+    <div class="tableTitle">BLOCK INFO</div>
+      <table class="blockTable">
+        <tr>
+          <th>Height</th>
+          <td>{{this.block.height}}</td>
+        </tr>
+        <tr>
+          <th>Hash</th>
+          <td>{{this.block.hash}}</td>
+        </tr>
+        <tr>
+          <th>Hora</th>
+          <td>{{this.block.timestamp}}</td>
+        </tr>
+        <tr>
+          <th>Miner</th>
+          <td class="link" @click="openWallet(this.block.miner)">{{this.block.miner}}</td>
+        </tr>
+        <tr>
+          <th>Number of Transactions</th>
+          <td>{{this.block.transactions && this.block.transactions.length }}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="blocksContainer">
+    <div class="tableTitle">TRANSACTIONS</div>
+      <table class="blocksTable">
+        <tr>
+          <th>Hash</th>
+          <th>Hora</th>
+          <th>Amount</th>
+          <th>Fee</th>
+          <th>From</th>
+          <th>To</th>
+        </tr>
+        <tr v-for="(transaction, i) in transactions" :key="i">
+          <td class="tdLinkStyle" @click="openTransaction(this.block.height, transaction.hash)">{{transaction.hash}}</td>
+          <td class="tdStyle">{{transaction.timestamp}}</td>
+          <td class="tdStyle">{{transaction.amount}}</td>
+          <td class="tdStyle">{{transaction.fee}}</td>
+          <td class="tdLinkStyle" @click="openWallet(transaction.from)">{{transaction.from}}</td>
+          <td class="tdLinkStyle" @click="openWallet(transaction.to)">{{transaction.to}}</td>
+        </tr>
+      </table>
+      <button :disabled="pageNumber == 1" @click="prevPage">Previous</button>
+      <button :disabled="pageNumber >= Math.ceil(this.block.transactions.length/this.itemsPerPage)" @click="nextPage">Next</button>
+    </div>
   </div>
   <div class="loadingSpinner" v-else>
     <Hexagon/>
@@ -94,4 +98,68 @@ export default {
 </script>
 
 <style scoped>
+
+.tdLinkStyle {
+  border-top: 1px solid #D3D3D3;
+  color: blue;
+  text-decoration: underline;
+  text-decoration-color: blue;
+}
+
+.tdLinkStyle:hover {
+  cursor: pointer;
+}
+
+.tdStyle {
+  border-top: 1px solid #D3D3D3;
+}
+
+.blocksContainer {
+  background: white;
+  background: white;
+  border-radius: 25px;
+  padding: 2%;
+  margin-bottom: 2%;
+}
+
+.tableTitle {
+  border-bottom: 1px solid #D3D3D3;
+  color: #808080;
+  padding-bottom: 1%;
+}
+
+.blocksTable {
+  padding-top: 1%;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.blockTable {
+  padding-top: 1%;
+  width: 100%;
+  table-layout: fixed;
+}
+
+th {
+  text-align: left;
+  padding-bottom: 1%;
+  font-weight:normal;
+}
+
+.twentyFiveWidth {
+  width: 25%;
+}
+
+.fiftyWidth {
+  width: 50%;
+}
+
+td {
+  padding-bottom: 1%;
+  padding-top: 1%;
+}
+
+.tdStyle {
+  border-top: 1px solid #D3D3D3;
+}
 </style>

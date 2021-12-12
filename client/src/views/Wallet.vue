@@ -1,7 +1,7 @@
 <template>
-  <div v-if="loaded">
-    <div>Wallet Info</div>
-    <table>
+  <div class="blocksContainer" v-if="loaded">
+    <div class="tableTitle">Wallet Info</div>
+    <table class="blocksTable">
       <tr>
         <th>Address</th>
         <td>{{this.wallet.address}}</td>
@@ -44,4 +44,33 @@ export default {
 </script>
 
 <style scoped>
+
+.blocksContainer {
+  background: white;
+  border-radius: 25px;
+  padding: 2%;
+}
+
+.tableTitle {
+  border-bottom: 1px solid #D3D3D3;
+  color: #808080;
+  padding-bottom: 1%;
+}
+
+.blocksTable {
+  padding-top: 1%;
+  width: 100%;
+  table-layout: fixed;
+}
+
+th {
+  text-align: left;
+  padding-bottom: 1%;
+  font-weight:normal;
+}
+td {
+  padding-bottom: 1%;
+  padding-top: 1%;
+}
+
 </style>
