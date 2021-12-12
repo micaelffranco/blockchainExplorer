@@ -1,17 +1,17 @@
 <template>
   <div class="navContainer">
-    <div class="navTitle">
+    <div @click="openHomePage()" class="navTitle">
       XI Explorer
     </div>
     <div class="routes">
       <div class="eachRoute">
-        <router-link to="/">Home</router-link>
+        <router-link class="routerClass" to="/">Home</router-link>
       </div>
       <div class="eachRoute">
-        <router-link to="/blocks">Blocks</router-link>
+        <router-link class="routerClass" to="/blocks">Blocks</router-link>
       </div>
       <div class="eachRoute">
-        <router-link to="/transactions">Transactions</router-link>
+        <router-link class="routerClass" to="/transactions">Transactions</router-link>
       </div>
     </div>
   </div>
@@ -21,18 +21,27 @@
 </template>
 
 <script>
+import router from '../router'
 export default {
   name: 'NavBar',
+  methods: {
+    openHomePage() {
+      router.push({ path: `/`})
+    },
+  }
 }
 </script>
 
 <style scoped>
 
+.routerClass {
+  text-decoration: none;
+}
+
 .homeContainer {
     padding: 3%;
     padding-left: 5%;
     padding-right: 5%;
-    background: #696969;
 }
 
 .eachRoute {
@@ -44,6 +53,10 @@ export default {
   justify-content: flex-start;
   border:2px solid black;
   padding: 5px;
+}
+
+.navTitle:hover {
+  cursor: pointer;
 }
 
 .routes {

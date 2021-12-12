@@ -2,19 +2,14 @@
   <div>
     <div class="tableTitle">LATEST TRANSACTIONS</div>
     <table class="transactionsTable">
-      <colgroup>
-        <col class="twentyFiveWidth" />
-        <col class="twentyFiveWidth" />
-        <col class="fiftyWidth" />
-      </colgroup>
       <tr>
         <th>Hash</th>
-        <th>Hora</th>
+        <th>At</th>
         <th>Amount</th>
       </tr>
       <tr v-for="(transaction, i) in transactions" :key="i">
         <td class="link" @click="openTransaction(transaction.hash)">{{transaction.hash}}</td>
-        <td>{{transaction.timestamp}}</td>
+        <td>{{new Date(transaction.timestamp).toLocaleTimeString([], {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute:'2-digit', second:'2-digit'})}}</td>
         <td>{{transaction.amount}}</td>
       </tr>
     </table>
@@ -46,14 +41,8 @@ export default {
 
 .transactionsTable {
   padding-top: 2%;
-}
-
-.twentyFiveWidth {
-  width: 25%;
-}
-
-.fiftyWidth {
-  width: 50%;
+  width: 100%;
+  table-layout: fixed;
 }
 
 th {
@@ -66,6 +55,7 @@ td {
   border-top: 1px solid #D3D3D3;
   padding-bottom: 2%;
   padding-top: 2%;
+  overflow:hidden;
 }
 
 </style>

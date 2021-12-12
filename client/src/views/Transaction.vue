@@ -7,8 +7,8 @@
         <td>{{this.transaction.hash}}</td>
       </tr>
       <tr>
-        <th>Hora</th>
-        <td>{{this.transaction.timestamp}}</td>
+        <th>At</th>
+        <td>{{new Date(this.transaction.timestamp).toLocaleTimeString([], {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute:'2-digit', second:'2-digit'})}}</td>
       </tr>
       <tr>
         <th>Amount</th>
@@ -95,6 +95,7 @@ th {
 td {
   padding-bottom: 1%;
   padding-top: 1%;
+  overflow:hidden;
 }
 
 </style>

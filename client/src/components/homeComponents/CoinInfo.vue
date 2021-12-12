@@ -2,26 +2,26 @@
   <div class="infoContainer">
     <div class="detailsContainer">
       <div class="headDetail">
-        <div class="title">XI PRICE</div>
+        <div class="title">XI Price</div>
         <div class="content">{{this.numberWithCommas(this.xiPrice)}} $</div>
       </div>
       <div class="bottomDetail">
-        <div class="title">MARKET CAP</div>
+        <div class="title">Market Cap</div>
         <div class="content">{{this.numberWithCommas(this.marketCap)}} $</div>
       </div>
     </div>
     <div class="detailsContainer">
       <div class="headDetail">
-        <div class="title">NUMBER OF TRANSACTIONS</div>
+        <div class="title">Number of transactions</div>
         <div class="content">{{this.numberOfTRansactions}}</div>
       </div>
       <div class="bottomDetail">
-        <div class="title">AMOUNT TRANSACTED</div>
+        <div class="title">Amount transacted</div>
         <div class="content">{{this.numberWithCommas(this.amountTransacted)}} $</div>
       </div>
     </div>
     <div class="graphContainer">
-      <div class="title">TRANSACTIONS PER MINUTE</div>
+      <div class="title">Transactions per minute</div>
       <area-chart :colors="['#55d6aa']" v-if="loaded" :data="chartData"></area-chart>
     </div>
   </div>
@@ -73,7 +73,7 @@ export default {
   width: 100%;
   background: white;
   border-radius: 25px;
-  margin-bottom: 3%
+  margin-bottom: 3%;
 }
 
 .graphContainer {

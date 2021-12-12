@@ -8,7 +8,7 @@
       </tr>
       <tr>
         <th>Balance</th>
-        <td>{{this.wallet.balance}}</td>
+        <td>{{Math.round((this.wallet.balance + Number.EPSILON) * 100) / 100}} $</td>
       </tr>
       <tr>
         <th>Nonce</th>
@@ -71,6 +71,7 @@ th {
 td {
   padding-bottom: 1%;
   padding-top: 1%;
+  overflow:hidden;
 }
 
 </style>

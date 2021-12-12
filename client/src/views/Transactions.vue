@@ -2,17 +2,9 @@
   <div class="blocksContainer" v-if="loaded">
     <div class="tableTitle">TRANSACTIONS</div>
     <table class="blocksTable">
-      <colgroup>
-        <col/>
-        <col/>
-        <col/>
-        <col/>
-        <col/>
-        <col/>
-      </colgroup>
       <tr>
         <th>Hash</th>
-        <th>Hora</th>
+        <th>At</th>
         <th>Amount</th>
         <th>Fee</th>
         <th>From</th>
@@ -20,7 +12,7 @@
       </tr>
       <tr v-for="(transaction, i) in transactions" :key="i">
         <td class="link" @click="openTransaction(transaction.hash)">{{transaction.hash}}</td>
-        <td>{{transaction.timestamp}}</td>
+        <td>{{new Date(transaction.timestamp).toLocaleTimeString([], {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute:'2-digit', second:'2-digit'})}}</td>
         <td>{{transaction.amount}}</td>
         <td>{{transaction.fee}}</td>
         <td class="link" @click="openWallet(transaction.from)">{{transaction.from}}</td>
@@ -90,18 +82,11 @@ th {
   font-weight:normal;
 }
 
-.twentyFiveWidth {
-  width: 25%;
-}
-
-.fiftyWidth {
-  width: 50%;
-}
-
 td {
   border-top: 1px solid #D3D3D3;
   padding-bottom: 1%;
   padding-top: 1%;
+  overflow:hidden;
 }
 
 </style>

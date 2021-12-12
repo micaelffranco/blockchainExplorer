@@ -12,8 +12,8 @@
           <td>{{this.block.hash}}</td>
         </tr>
         <tr>
-          <th>Hora</th>
-          <td>{{this.block.timestamp}}</td>
+          <th>Mined at</th>
+          <td>{{new Date(this.block.timestamp).toLocaleTimeString([], {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute:'2-digit', second:'2-digit'})}}</td>
         </tr>
         <tr>
           <th>Miner</th>
@@ -30,7 +30,7 @@
       <table class="blocksTable">
         <tr>
           <th>Hash</th>
-          <th>Hora</th>
+          <th>At</th>
           <th>Amount</th>
           <th>Fee</th>
           <th>From</th>
@@ -38,7 +38,7 @@
         </tr>
         <tr v-for="(transaction, i) in transactions" :key="i">
           <td class="tdLinkStyle" @click="openTransaction(this.block.height, transaction.hash)">{{transaction.hash}}</td>
-          <td class="tdStyle">{{transaction.timestamp}}</td>
+          <td class="tdStyle">{{new Date(transaction.timestamp).toLocaleTimeString([], {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute:'2-digit', second:'2-digit'})}}</td>
           <td class="tdStyle">{{transaction.amount}}</td>
           <td class="tdStyle">{{transaction.fee}}</td>
           <td class="tdLinkStyle" @click="openWallet(transaction.from)">{{transaction.from}}</td>
@@ -146,17 +146,10 @@ th {
   font-weight:normal;
 }
 
-.twentyFiveWidth {
-  width: 25%;
-}
-
-.fiftyWidth {
-  width: 50%;
-}
-
 td {
   padding-bottom: 1%;
   padding-top: 1%;
+  overflow:hidden;
 }
 
 .tdStyle {

@@ -2,19 +2,14 @@
   <div class="blocksContainer" v-if="loaded">
     <div class="tableTitle">BLOCKS</div>
     <table class="blocksTable">
-      <colgroup>
-        <col class="twentyFiveWidth" />
-        <col class="twentyFiveWidth" />
-        <col class="fiftyWidth" />
-      </colgroup>
       <tr>
         <th>Height</th>
-        <th>Hora</th>
+        <th>Mined at</th>
         <th>Miner</th>
       </tr>
       <tr v-for="(block, i) in blocks" :key="i">
         <td class="link" @click="openBlock(block.height)">{{block.height}}</td>
-        <td>{{block.timestamp}}</td>
+        <td>{{new Date(block.timestamp).toLocaleTimeString([], {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute:'2-digit', second:'2-digit'})}}</td>
         <td class="link" @click="openWallet(block.miner)">{{block.miner}}</td>
       </tr>
     </table>
@@ -82,18 +77,11 @@ th {
   font-weight:normal;
 }
 
-.twentyFiveWidth {
-  width: 25%;
-}
-
-.fiftyWidth {
-  width: 50%;
-}
-
 td {
   border-top: 1px solid #D3D3D3;
   padding-bottom: 1%;
   padding-top: 1%;
+  overflow:hidden;
 }
 
 </style>
