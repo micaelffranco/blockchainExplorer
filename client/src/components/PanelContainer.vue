@@ -12,7 +12,9 @@
       </div>
     </div>
   </div>
-  <Hexagon v-else/>
+  <div class="loadingSpinner" v-else>
+    <Hexagon/>
+  </div>
 </template>
 
 <script>
@@ -51,6 +53,8 @@ export default {
 .panelContainer {
   display: flex;
   flex-direction: row;
+  background: white;
+  border-radius: 25px;
 }
 
 .blockContainer {

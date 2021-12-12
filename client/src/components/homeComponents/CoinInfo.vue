@@ -1,20 +1,28 @@
 <template>
   <div class="infoContainer">
     <div class="detailsContainer">
-      <div>XI PRICE</div>
-      <div>{{this.xiPrice}}</div>
-      <div>MARKET CAP</div>
-      <div>{{this.marketCap}}</div>
+      <div class="headDetail">
+        <div class="title">XI PRICE</div>
+        <div class="content">{{this.numberWithCommas(this.xiPrice)}} $</div>
+      </div>
+      <div class="bottomDetail">
+        <div class="title">MARKET CAP</div>
+        <div class="content">{{this.numberWithCommas(this.marketCap)}} $</div>
+      </div>
     </div>
     <div class="detailsContainer">
-      <div>NUMBER OF TRANSACTIONS</div>
-      <div>{{this.numberOfTRansactions}}</div>
-      <div>AMOUNT TRANSACTED</div>
-      <div>{{this.amountTransacted}}</div>
+      <div class="headDetail">
+        <div class="title">NUMBER OF TRANSACTIONS</div>
+        <div class="content">{{this.numberOfTRansactions}}</div>
+      </div>
+      <div class="bottomDetail">
+        <div class="title">AMOUNT TRANSACTED</div>
+        <div class="content">{{this.numberWithCommas(this.amountTransacted)}} $</div>
+      </div>
     </div>
     <div class="graphContainer">
-      <div>TRANSACTIONS PER MINUTE</div>
-      <area-chart v-if="loaded" :data="chartData"></area-chart>
+      <div class="title">TRANSACTIONS PER MINUTE</div>
+      <area-chart :colors="['#55d6aa']" v-if="loaded" :data="chartData"></area-chart>
     </div>
   </div>
 </template>
@@ -36,6 +44,11 @@ export default {
       loaded: false
     }
   },
+  methods: {
+    numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+  },
   async mounted() {
     this.blocks.forEach((block) => {
         this.numberOfTRansactions += block.transactions.length
@@ -45,7 +58,8 @@ export default {
           this.chartData[fullDate] ? this.chartData[fullDate] = this.chartData[fullDate] + 1 : this.chartData[fullDate] = 1
         });
     });
-    this.marketCap = this.amountTransacted * this.xiPrice
+    this.marketCap = Math.round((this.amountTransacted * this.xiPrice + Number.EPSILON) * 100) / 100
+    this.amountTransacted = Math.round((this.amountTransacted + Number.EPSILON) * 100) / 100
     this.loaded = true
   }
 }
@@ -57,14 +71,42 @@ export default {
   display: flex;
   flex-direction: row;
   width: 100%;
+  background: white;
+  border-radius: 25px;
+  margin-bottom: 3%
 }
 
 .graphContainer {
   width: 50%;
+  padding-right: 2%;
+  padding-left: 2%;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 
 .detailsContainer {
   width: 25%;
+  border-right: 1px solid #D3D3D3;
+  display: flex;
+  flex-direction: column;
+  padding-right: 2%;
+  padding-left: 2%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.headDetail {
+  border-bottom: 1px solid #D3D3D3;
+  height: 50%;
+}
+
+.bottomDetail {
+  height: 50%;
+}
+
+.title {
+  color: #808080;
+  padding-bottom: 1%;
 }
 
 </style>
